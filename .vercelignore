@@ -1,0 +1,14 @@
+# Pythonバックエンドと誤検出されないようVercelビルドから除外
+*.py
+__pycache__/
+requirements.txt
+
+# 個人学習履歴
+progress.json
+anki_import.tsv
+
+# ローカル開発用
+.claude/
+.idea/
+.vscode/
+.DS_Store
