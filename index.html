@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f172a" />
+<meta name="description" content="JDLA G検定 試験対策フラッシュカード（DL概要・応用例・要素技術 全80枚）" />
+<title>G検定フラッシュカード｜DL系80枚追い込み</title>
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<header class="app-header">
+  <h1>🎴 G検定フラッシュカード</h1>
+  <button id="theme-toggle" class="icon-btn" aria-label="テーマ切替">🌓</button>
+</header>
+
+<main id="app">
+  <!-- ===== メニュー画面 ===== -->
+  <section id="menu" class="screen active">
+    <div class="hero">
+      <p class="lead">DL概要・DL応用例・DL要素技術 <strong>全80枚</strong> から出題するで。</p>
+      <p class="sub" id="last-session-info">前回の学習履歴：未受講</p>
+    </div>
+
+    <div class="card-block">
+      <h2>出題範囲</h2>
+      <div class="chip-group" id="domain-chips" role="group" aria-label="ドメイン選択"></div>
+    </div>
+
+    <div class="card-block">
+      <h2>優先度</h2>
+      <div class="chip-group" id="priority-chips" role="group" aria-label="優先度選択">
+        <button class="chip active" data-priority="all">すべて</button>
+        <button class="chip" data-priority="high">high のみ</button>
+        <button class="chip" data-priority="mid">mid のみ</button>
+      </div>
+    </div>
+
+    <div class="card-block">
+      <h2>出題数</h2>
+      <div class="chip-group" id="count-chips" role="group" aria-label="出題数選択">
+        <button class="chip" data-count="10">10枚</button>
+        <button class="chip active" data-count="20">20枚</button>
+        <button class="chip" data-count="40">40枚</button>
+        <button class="chip" data-count="all">全部</button>
+      </div>
+    </div>
+
+    <div class="action-row">
+      <button id="start-btn" class="primary-btn">🚀 開始</button>
+      <button id="review-btn" class="ghost-btn">🔁 間違えたカードだけ</button>
+    </div>
+
+    <div class="action-row sub-row">
+      <button id="stats-btn" class="link-btn">📊 学習統計を見る</button>
+      <button id="reset-btn" class="link-btn danger">🗑 進捗をリセット</button>
+    </div>
+  </section>
+
+  <!-- ===== セッション画面 ===== -->
+  <section id="session" class="screen">
+    <div class="session-bar">
+      <button id="quit-btn" class="icon-btn" aria-label="終了">✕</button>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+        <span id="progress-text">0 / 0</span>
+      </div>
+    </div>
+
+    <div id="card-area" class="card-area">
+      <article id="flashcard" class="flashcard">
+        <div class="card-meta">
+          <span id="card-domain" class="badge"></span>
+          <span id="card-priority" class="badge"></span>
+          <span id="card-category" class="muted"></span>
+        </div>
+        <h2 id="card-term" class="term"></h2>
+        <p id="card-front" class="front"></p>
+        <div id="card-back-block" class="back-block hidden">
+          <h3>答え</h3>
+          <p id="card-back" class="back"></p>
+          <div id="card-trap-block" class="trap-block hidden">
+            <h4>⚠️ ひっかけ注意</h4>
+            <p id="card-trap"></p>
+          </div>
+          <div id="card-related-block" class="related-block hidden">
+            <h4>🔗 関連用語</h4>
+            <p id="card-related"></p>
+          </div>
+          <p id="card-source" class="source muted"></p>
+        </div>
+      </article>
+    </div>
+
+    <div id="action-bar" class="action-bar">
+      <button id="reveal-btn" class="primary-btn wide">答えを見る</button>
+      <div id="judge-row" class="judge-row hidden">
+        <button id="wrong-btn" class="judge-btn wrong" aria-label="不正解">❌ 不正解</button>
+        <button id="skip-btn" class="judge-btn skip" aria-label="スキップ">⏭ スキップ</button>
+        <button id="right-btn" class="judge-btn right" aria-label="正解">⭕ 正解</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 結果画面 ===== -->
+  <section id="result" class="screen">
+    <div class="result-card">
+      <h2>🎉 セッション終了</h2>
+      <div class="result-stats">
+        <div class="stat-box ok"><span class="num" id="result-right">0</span><span class="lbl">正解</span></div>
+        <div class="stat-box ng"><span class="num" id="result-wrong">0</span><span class="lbl">不正解</span></div>
+        <div class="stat-box sk"><span class="num" id="result-skip">0</span><span class="lbl">スキップ</span></div>
+      </div>
+      <p id="result-rate" class="rate"></p>
+      <p id="result-comment" class="comment"></p>
+      <div class="action-row">
+        <button id="result-review-btn" class="primary-btn">🔁 間違えただけ復習</button>
+        <button id="result-home-btn" class="ghost-btn">🏠 メニューへ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 統計画面 ===== -->
+  <section id="stats" class="screen">
+    <div class="stats-card">
+      <h2>📊 学習統計</h2>
+      <div id="stats-summary" class="stats-summary"></div>
+      <h3>苦手カード Top10</h3>
+      <ol id="stats-weak" class="stats-list"></ol>
+      <button id="stats-back-btn" class="ghost-btn wide">🏠 メニューへ戻る</button>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  <small>© 2026 G検定フラッシュカード（MIT License） / 進捗はこの端末のブラウザに保存されるで</small>
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>

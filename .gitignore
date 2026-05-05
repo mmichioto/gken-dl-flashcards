@@ -4,6 +4,9 @@ progress.json
 # 生成物
 anki_import.tsv
 
+# ローカル開発用（Claude Code プレビュー設定）
+.claude/
+
 # Python
 __pycache__/
 *.py[cod]
