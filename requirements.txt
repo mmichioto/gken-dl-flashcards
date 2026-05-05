@@ -1,0 +1,5 @@
+# G検定フラッシュカードは Python 標準ライブラリのみで動作します
+# （argparse, json, os, random, sys, datetime, pathlib）
+# 追加の依存パッケージは不要です。
+#
+# Python 3.7+ で動作確認済み。

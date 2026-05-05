@@ -1,0 +1,30 @@
+# 学習進捗（個人データ）
+progress.json
+
+# 生成物
+anki_import.tsv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
